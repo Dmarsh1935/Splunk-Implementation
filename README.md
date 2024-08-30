@@ -100,6 +100,8 @@ Open the following ports on your firewall:
 9. Click on <b>Apps</b> in the top left corner and select <b>Search and Reporting</b>
 10. Start a new search: <b>Index="winlog_clients"</b>
 
+    *If configured successfully, you should see your Windows client logs appear*
+
 ![image](https://github.com/user-attachments/assets/dbf56346-9205-44ce-b014-85331cd61de9)
 
 
