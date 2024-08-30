@@ -58,7 +58,7 @@ Open the following ports on your firewall:
     - Set the Receiving Indexer: Enter your server's IP address or hostname and the default port (9997)
     - Complete the installation
 
-*It's important to note that you must set configure BOTH the Deployment Server and the Receiving Indexer.*
+*It's important to note that you must configure BOTH the Deployment Server and the Receiving Indexer.*
 
 ## 5. Verify Connectivity
 
