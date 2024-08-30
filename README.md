@@ -1,7 +1,5 @@
-# Splunk-Implementation
+# Splunk Implementation Guide
 ![image](https://github.com/user-attachments/assets/f998bcdc-e3f1-4634-84eb-542d91b2865c)
-
-
 
 ## Introduction
 
