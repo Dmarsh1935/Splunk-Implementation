@@ -1,5 +1,6 @@
 # Splunk-Implementation
-![image](https://github.com/user-attachments/assets/a2ba5dda-85f5-4c18-b663-1bd613e73a31)
+![image](https://github.com/user-attachments/assets/f998bcdc-e3f1-4634-84eb-542d91b2865c)
+
 
 
 ## Introduction
