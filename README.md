@@ -3,9 +3,11 @@
 
 ## Introduction
 
-Welcome to my comprehensive guide on installing and implementing Splunk! This documentation provides a step-by-step approach to setting up Splunk in a Windows environment, configuring it for log management, and establishing alerts for security monitoring.
+Welcome to my comprehensive guide on installing and implementing Splunk! This documentation provides a step-by-step approach to setting up Splunk in a Windows environment, configuring it for log management, and creating dashboards to visualize data.
 
-Splunk is a powerful platform for searching, monitoring, and analyzing machine-generated data. It excels in handling large volumes of log data, making it a critical tool for IT operations, security monitoring, and data analytics. This guide covers the installation of Splunk Universal Forwarder and Splunk Enterprise, as well as the configuration of alerting mechanisms to enhance your system's visibility and responsiveness.
+Splunk is a powerful platform for searching, monitoring, and analyzing machine-generated data. It excels in handling large volumes of log data, making it a critical tool for IT operations, security monitoring, and data analytics. This guide covers the installation of Splunk Universal Forwarder and Splunk Enterprise, as well as the configuration of dashboards to visualize results. 
+
+In this guide, I query the Windows Security Event Logs to identify and visualize brute force attacks from real adversaries. 
 
 The primary goal of this documentation is to streamline the process of setting up Splunk from scratch, ensuring that users can efficiently deploy, configure, and utilize the platform to meet their specific needs. 
 
@@ -13,8 +15,8 @@ The primary goal of this documentation is to streamline the process of setting u
 <b>By following this guide, you will learn how to:</b>
 
 - Install and configure Splunk Universal Forwarder and Splunk Enterprise.
-- Create and manage alerts to monitor for critical events and anomalies.
 - Troubleshoot common issues encountered during the setup process.
+- Create and manage dashboards to visualize results from Splunk search queries. 
 
 ## 1. Create Virtual Machines
 1. Provision a VM running Windows Server 2022
@@ -105,12 +107,55 @@ Open the following ports on your firewall:
 ![image](https://github.com/user-attachments/assets/dbf56346-9205-44ce-b014-85331cd61de9)
 
 
+## Visualizing Query Results
+Splunk allows us to visualize our search query results and create dashboards. For the following examples, I opened up the Windows 10 Client's Network Security Group (NSG) to allow all traffic from the internet to query the logon failures and get statistics for which IP addresses are attempting to brute force the machine, as well as to get statistics on the most common logon account names for the attempted brute force attacks. 
+
+<h3>Search Queries and Visualizing Results</h3>
+
+<b>sourcetype="WinEventLog:Security" EventCode="4625"
+| table Account_Name, ComputerName, Failure_Reason, Source_Network_Address
+| stats count by Source_Network_Address</b>
+
+Here is the statistics table including the account name, computer name, failure reason, and source IP address:
+![image](https://github.com/user-attachments/assets/0bc4cb87-b624-4479-848f-478c2f1849a1)
+
+Here is the visualization of these results:
+![image](https://github.com/user-attachments/assets/fdd72737-9f83-4dcf-aafe-2383b12154ac)
+
+<b>sourcetype="WinEventLog:Security" EventCode="4625"
+| table Account_Name, ComputerName, Failure_Reason, Source_Network_Address
+| top Account_Name
+</b>
+
+Here is the statistics table that counts the number of times each Account Name was used in a failed attempt to login and displays the top results: 
+![image](https://github.com/user-attachments/assets/da3cfce1-756d-4e54-9e4f-feca1455f2b4)
+
+Here is the visualization of these results:
+![image](https://github.com/user-attachments/assets/5c1eb273-85e2-407b-a8c3-3486668a74c6)
+
+
+
+
+
+<h3>Creating a Splunk Dashboard</h3>
+
+1. Click <b>save as</b> in the top right corner
+2. Click <b>New Dashboard </b>
+3. Give your Dashboard a title
+4. Name the Panel Title (This is will be the name of the chart you're currently visualizing)
+
+**Note that in this example, I created a dashboard and saved two data visualizations to the same dashboard**
+
+
+![image](https://github.com/user-attachments/assets/3417d0ec-7583-4186-9b67-e3fc6cd265f7)
+
+
 
 
 
 
 ## Conclusion
 
-You’ve successfully managed to set up Splunk, troubleshoot issues, and configure data inputs to monitor your Windows event logs. With the firewall settings in place and the software installed, you are now equipped to perform searches and analyze your log data effectively. 
+You’ve successfully managed to set up Splunk, troubleshoot issues, configure data inputs to monitor your Windows event logs, and create dashboards. With the firewall settings in place and the software installed, you are now equipped to perform searches and analyze your log data effectively. 
 
 Thank you for following this guide as it walked you through the essential steps to get your Splunk environment up and running. Wishing you success with your Splunk setup and efficient monitoring of your systems!
